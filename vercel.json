@@ -8,7 +8,11 @@
     ],
     "routes": [
         {
-            "src": "(.*)",
+            "src": "/public/(.*)",
+            "dest": "public/$1"
+        },
+        {
+            "src": ".*",
             "dest": "index.js"
         }
     ]
