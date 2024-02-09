@@ -53,7 +53,11 @@ const upload = multer({
 const usersSchema = {
     username: String,
     email: String,
-    password: String
+    password: String,
+    online: {
+        type: Boolean,
+        default: false,
+    },
 };
 const dailySchema = {
     username: String,

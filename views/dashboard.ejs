@@ -20,10 +20,10 @@
                     <i id="color" class="fa-solid fa-calendar-day"></i>
                     <div>My Daily</div>
                 </div></a>
-                <div onmouseover="setColor1()" onmouseout="unsetColor1()" class="my-list">
+                <a href="/livechat"><div onmouseover="setColor1()" onmouseout="unsetColor1()" class="my-list">
                     <i id="color1" id="color" class="fa-solid fa-calendar-week"></i>
                     <div>My Weekly</div>
-                </div>
+                </div></a>
                 <div onmouseover="setColor2()" onmouseout="unsetColor2()" class="my-list">
                     <i id="color2" id="color" class="fa-solid fa-calendar-days"></i>
                     <div>My Monthly</div>
@@ -88,6 +88,26 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="chat-container">
+        <div class="button-chat">
+            <i class="fa-brands fa-rocketchat"></i>
+            <div>Chat</div>
+        </div>
+        <section>
+            <div class="live-chat">
+                <div class="header-chat">
+                    <div>Live Chat</div>
+                    <i id="close-chat" class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="main-chat">
+                    <ul id="messages"></ul>
+                    <form id="form" action="">
+                        <input type="text" id="m" autocomplete="off" /><button><i class="fa-solid fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </div>
     <script>
         function main(){
@@ -201,6 +221,15 @@
             document.getElementById('month').innerText = currentMyMonth;
         });
 
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttonChat = document.querySelector(".button-chat");
+            const closeChat = document.getElementById("close-chat");
+            const liveChat = document.querySelector("section");
+
+            buttonChat.addEventListener("click", () => liveChat.classList.add("livechat-active"));
+            closeChat.addEventListener("click", () => liveChat.classList.remove("livechat-active"));
+        });
+
         function confirmLogout() {
             const logoutConfirmed = window.confirm("Are you sure you want to logout?");
             if (logoutConfirmed) {
@@ -224,9 +253,48 @@
                     alert("Logout failed");
                 });
             } else {
-                window.location.href = "/dashbpard";
+                window.location.href = "/dashboard";
             }
-        }
+        }   
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.4/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        const socket = io();
+        const username = '<%= username %>';
+
+        socket.emit('login', username);
+
+        $('form').submit(function() {
+            var inputValue = $('#m').val();
+
+            if (inputValue.trim() === "") {
+                return false;
+            }
+            socket.emit('chat', inputValue);
+            $('#m').val('');
+            return false;
+        });
+
+        socket.on('chat', function(msg) {
+            $('#messages').append($('<li>').text(msg));
+            var lastChatList = $('#messages li:last')[0];
+
+            lastChatList.scrollIntoView({ behavior: "smooth", block:"end", inline:"nearest"});
+        });
+
+        socket.on('userStatus', ({ username, online }) => {
+            console.log(`User ${username} is ${online ? 'online' : 'offline'}`);
+        });
+
+        socket.on('updateUserCount', (count) => {
+            let sumCount = count + 1;
+            $('#online-count').text(sumCount);
+        });
+
+        window.addEventListener('beforeunload', () => {
+            socket.emit('logout', username);
+        })
     </script>
 </body>
 </html>

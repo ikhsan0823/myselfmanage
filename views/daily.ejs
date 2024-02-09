@@ -339,8 +339,6 @@
                 var description = document.getElementById('description').value;
                 var date = document.getElementById('task-date').value;
 
-                console.log("Submitting form with data:", { title, description, date });
-
                 const d = new Date(date);
                 const dateString = d.toISOString().split('T')[0];
 
@@ -514,9 +512,7 @@
             cardElementId = cardElement.id;
             var idSplit = cardElementId.split('-')[1];
             globalCardElementId = idSplit;
-            console.log("Card id:", globalCardElementId);
             document.getElementById("uniqueId").value = globalCardElementId;
-            console.log(document.getElementById("uniqueId").value);
         }
 
         function confirmLogout() {

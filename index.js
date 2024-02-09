@@ -1,15 +1,59 @@
+const http = require('http');
+const socketIO = require('socket.io');
 const { req, res } = require('express');
 const bcrypt = require('bcrypt');
 const { app, Users, Daily, File, upload, Balance, History } = require('./config');
-
+const Server = http.createServer(app);
+const io = socketIO(Server);
+let onlineUsers = 0;
 
 app.get("/", (req, res) => {
     if (req.session.user) {
-        res.render("dashboard");
+        res.redirect("dashboard");
         return;
+    } else {
+        return res.redirect("index.html");
     }
-    return res.redirect("index.html");
-}).listen(8000);
+});
+Server.listen(8000);
+
+app.get("/livechat", (req, res) => {
+    const username = req.session.user;
+    res.render('example', { username: username });
+});
+
+io.on('connection', (socket) => {
+    console.log('User connected');
+
+    socket.on('login', async (username) => {
+        const user = await Users.findOneAndUpdate({ username }, { online: true }, { new: true });
+        if (user.online) {
+            onlineUsers++;
+            io.emit('userStatus', { username, online: true });
+            io.emit('updateUserCount', onlineUsers);
+        }
+    });
+
+    socket.on('chat', (msg) => {
+        console.log('Message:' + msg);
+        io.emit('chat', msg);
+    });
+
+    socket.on('logout', async (username) => {
+        const user = await Users.findOneAndUpdate({ username }, { online: false }, { new: true });
+        if (user.online) {
+            onlineUsers--;
+            io.emit('userStatus', { username, online: false });
+            io.emit('updateUserCount', onlineUsers);
+        }
+    });
+
+    socket.on('disconnect', async (username) => {
+        console.log('User disconnected');
+        onlineUsers--;
+        io.emit('userStatus', { username, online: false });
+    });
+});
 
 app.post("/signup", async function (req, res) {
     try {
@@ -148,8 +192,7 @@ app.get("/carddaily", async (req, res) => {
 });
 
 app.delete("/dailytask/:uniqueId", async (req, res) => {
-    const uniqueId = req.params.uniqueId;
-
+    const uniqueId = req.params.uniqueId
     try {
         const deleteTask = await Daily.findOneAndDelete({ uniqueId: uniqueId });
 
