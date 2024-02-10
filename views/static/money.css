@@ -216,6 +216,7 @@ body{
     margin-right: 10px;
 }
 .input-money{
+    outline: none;
     border: none;
     background-color: #d8d8d8;
     color: #030303;

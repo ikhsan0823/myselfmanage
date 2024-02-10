@@ -100,6 +100,10 @@
                     <div>Live Chat</div>
                     <i id="close-chat" class="fa-solid fa-xmark"></i>
                 </div>
+                <div class="user-online">
+                    <i class="fa-solid fa-user"></i>
+                    <div id="online-count"></div>
+                </div>
                 <div class="main-chat">
                     <ul id="messages"></ul>
                     <form id="form" action="">
@@ -271,20 +275,32 @@
             if (inputValue.trim() === "") {
                 return false;
             }
-            socket.emit('chat', inputValue);
+            socket.emit('chat', { message: inputValue, username: username });
             $('#m').val('');
             return false;
         });
 
-        socket.on('chat', function(msg) {
-            $('#messages').append($('<li>').text(msg));
+        socket.on('chat', function(data) {
+            var chatUser = data.username;
+            var chatText = data.message;
+            var now = new Date();
+            var chatTimeHours = now.getHours();
+            var chatTimeMinutes = now.getMinutes();
+
+            var listChat = $('<li>');
+            var component1 = $('<div class="username-chat">').text(chatUser);
+            var component2 = $('<div class="chat-text">').text(chatText);
+            var component3 = $('<div class="chat-time">').text(chatTimeHours + ':' + (chatTimeMinutes < 10 ? '0' : '') + chatTimeMinutes);
+            
+            listChat.append(component1, component2, component3);
+            $('#messages').append(listChat);
             var lastChatList = $('#messages li:last')[0];
 
             lastChatList.scrollIntoView({ behavior: "smooth", block:"end", inline:"nearest"});
         });
 
         socket.on('userStatus', ({ username, online }) => {
-            console.log(`User ${username} is ${online ? 'online' : 'offline'}`);
+            $('#messages').append($('<li>').text(`${username} is ${online ? 'online' : 'offline'}`));
         });
 
         socket.on('updateUserCount', (count) => {

@@ -128,6 +128,7 @@ section.signup-active .signup form{
     cursor: pointer;
 }
 .signup input{
+    outline: none;
     height: 40px;
     width: 100%;
     background-color: #d8d8d8;
@@ -180,6 +181,7 @@ section.login-active .login form{
     text-transform: uppercase;
 }
 .login input{
+    outline: none;
     height: 40px;
     width: 100%;
     background-color: #d8d8d8;

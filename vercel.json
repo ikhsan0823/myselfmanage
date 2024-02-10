@@ -2,6 +2,11 @@
     "version": 2,
     "builds": [
         {
+            "src": "public",
+            "use": "@vercel/static-build",
+            "config": {}
+        },
+        {
             "src": "index.js",
             "use": "@vercel/node"
         }
@@ -9,7 +14,11 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "index.js"
+            "dest": "/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "public/$1"
         }
     ]
 }

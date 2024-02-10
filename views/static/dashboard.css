@@ -265,14 +265,38 @@ section.livechat-active .live-chat{
     scrollbar-color: transparent transparent;
 }
 #messages li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 100px;
+    min-height: 40px;
     width: fit-content;
     height: fit-content;
     background-color: #9b9b9b;
     color: #f9f9f9;
+    font-size: 12px;
     font-weight: 600;
-    padding: 10px 10px 10px 10px;
+    padding: 3px 10px 3px 10px;
     border-radius: 10px;
     margin-bottom: 15px;
+}
+li .username-chat{
+    width: 100%;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 500;
+}
+li .chat-text{
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+}
+li .chat-time{
+    width: 100%;
+    text-align: right;
+    font-size: 8px;
+    font-weight: 400;
 }
 .main-chat form{
     width: 100%;
@@ -285,6 +309,7 @@ section.livechat-active .live-chat{
     border: none;
     margin-right: 3%;
     padding: 10px 10px 10px 10px;
+    outline: none;
 }
 .main-chat form button{
     width: 15%;
@@ -292,4 +317,16 @@ section.livechat-active .live-chat{
     border-radius: 8px;
     border: none;
     cursor: pointer;
+}
+
+.live-chat .user-online{
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #f9f9f9;
+    font-weight: 600;
+}
+.user-online i{
+    margin-right: 5px;
 }

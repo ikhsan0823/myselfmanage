@@ -17,7 +17,7 @@
         const socket = io();
         const username = '<%= username %>';
 
-        socket.emit('login', username);
+        socket.emit('login', 'chat', username);
 
         $('form').submit(function() {
             socket.emit('chat', $('#m').val());
@@ -25,7 +25,7 @@
             return false;
         });
 
-        socket.on('chat', function(msg) {
+        socket.on('chat', function(msg, username) {
             $('#messages').append($('<li>').text(msg));
         });
 
