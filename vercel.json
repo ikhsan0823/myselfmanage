@@ -2,7 +2,7 @@
     "builds": [
         {
             "src": "express-server/index.js",
-            "use": "@vervel/node",
+            "use": "@now/node-server",
             "config": {
                 "NODE_VERSION": "21.4.0",
                 "NODE_ENV": "production",
@@ -11,7 +11,7 @@
         },
         {
             "src": "socket-server/socketIO.js",
-            "use": "@vervel/node",
+            "use": "@now/node-server",
             "config": {
                 "NODE_VERSION": "21.4.0",
                 "NODE_ENV": "production",
