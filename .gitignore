@@ -1,4 +1,4 @@
-node_modules/
+node_modules
 package-lock.json
 express-server/package-lock.json
 express-server/node_modules
