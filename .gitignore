@@ -1,2 +1,6 @@
 node_modules/
 package-lock.json
+express-server/package-lock.json
+express-server/node_modules
+socket-server/package-lock.json
+socket-server/node_modules

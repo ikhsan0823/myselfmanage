@@ -1,0 +1,16 @@
+{
+  "name": "socket-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "socketIO.js",
+  "scripts": {
+    "start": "node socketIO.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ikhsan",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "socket.io": "^4.7.4"
+  }
+}

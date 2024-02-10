@@ -1,10 +1,8 @@
-const http = require('http');
-const socketIO = require('socket.io');
 const { req, res } = require('express');
+const http = require('http');
 const bcrypt = require('bcrypt');
 const { app, Users, Daily, File, upload, Balance, History } = require('./config');
 const Server = http.createServer(app);
-const io = socketIO(Server);
 const PORT = process.env.PORT || 8000;
 
 
@@ -21,32 +19,6 @@ Server.listen(PORT);
 app.get("/livechat", (req, res) => {
     const username = req.session.user;
     res.render('example', { username: username });
-});
-
-io.on('connection', (socket) => {
-    socket.on('login', async (username) => {
-        const onlineQuery = Users.find({online: true});
-        const onlineUsers = await onlineQuery.countDocuments();
-        const user = await Users.findOneAndUpdate({ username }, { online: true }, { new: true });
-        if (user.online) {
-            io.emit('userStatus', { username, online: true });
-            io.emit('updateUserCount', onlineUsers);
-        }
-    });
-
-    socket.on('chat', (data) => {
-        io.emit('chat', { message: data.message, username: data.username });
-    });
-
-    socket.on('logout', async (username) => {
-        const onlineQuery = Users.find({online: true});
-        const onlineUsers = await onlineQuery.countDocuments();
-        const user = await Users.findOneAndUpdate({ username }, { online: false }, { new: true });
-        if (user.online) {
-            io.emit('userStatus', { username, online: false });
-            io.emit('updateUserCount', onlineUsers);
-        }
-    });
 });
 
 app.post("/signup", async function (req, res) {

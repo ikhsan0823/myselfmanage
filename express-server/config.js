@@ -1,13 +1,15 @@
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const mongoose = require("./database");
 const multer = require("multer");
 const path = require("path");
 const ejs = require("ejs");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -32,11 +34,6 @@ mongoose.connect("mongodb+srv://test123:test123@selfmanagecluster.jaynyvk.mongod
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
-
-const db = mongoose.connection;
-
-db.on('error', () => console.log("error in connecting database"));
-db.once('open', () => console.log("Connected to MongoDB"));
 
 const storage = multer.diskStorage({
     destination: '/uploads/',
