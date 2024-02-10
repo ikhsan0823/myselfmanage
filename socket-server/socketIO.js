@@ -1,5 +1,5 @@
 const mongoose = require("../express-server/database");
-const { Users } = require("../express-server/config")
+const { Users } = require("../express-server/config");
 const http = require('http');
 const socketIO = require('socket.io');
 
