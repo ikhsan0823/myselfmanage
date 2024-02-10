@@ -2,18 +2,18 @@
     "builds": [
         {
             "src": "express-server/index.js",
-            "use": "@now/node-server",
+            "use": "@vervel/node",
             "config": {
-                "NODE_VERSION": "10.2.4",
+                "NODE_VERSION": "21.4.0",
                 "NODE_ENV": "production",
                 "MONGODB_URI": "@mongodb-uri"
             }
         },
         {
             "src": "socket-server/socketIO.js",
-            "use": "@now/node-server",
+            "use": "@vervel/node",
             "config": {
-                "NODE_VERSION": "10.2.4",
+                "NODE_VERSION": "21.4.0",
                 "NODE_ENV": "production",
                 "MONGODB_URI": "@mongodb-uri"
             }
