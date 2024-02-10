@@ -269,6 +269,7 @@ section.livechat-active .live-chat{
     flex-direction: column;
     justify-content: center;
     min-width: 100px;
+    max-width: 200px;
     min-height: 40px;
     width: fit-content;
     height: fit-content;
@@ -279,6 +280,7 @@ section.livechat-active .live-chat{
     padding: 3px 10px 3px 10px;
     border-radius: 10px;
     margin-bottom: 15px;
+    overflow-wrap: break-word;
 }
 li .username-chat{
     width: 100%;
