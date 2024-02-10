@@ -5,6 +5,7 @@
   "main": "socketIO.js",
   "scripts": {
     "start": "node socketIO.js",
+    "build": "@vercel/ncc build socketIO.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ikhsan",
