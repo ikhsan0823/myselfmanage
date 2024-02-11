@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./express-server/index.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "./socket-server/socketIO.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      
+      {
+        "src": "/(.*)",
+        "dest": "/"
+      }
+    ]
+  }
