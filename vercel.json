@@ -13,8 +13,8 @@
     "routes": [
       
       {
-        "src": "./express-server/(.*)",
-        "dest": "/"
+        "src": "./express-server/public/(.*)",
+        "dest": "/index.html"
       }
     ]
   }
