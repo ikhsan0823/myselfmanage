@@ -14,7 +14,7 @@
       
       {
         "src": "./express-server/public/(.*)",
-        "dest": "/index.html"
+        "dest": "index.js"
       }
     ]
   }
