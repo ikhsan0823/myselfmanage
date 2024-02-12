@@ -2,7 +2,7 @@
   "name": "test",
   "version": "1.0.0",
   "engines": {
-    "node": "21.4.0"
+    "node": "18.18.2"
   },
   "scripts": {
     "start": "node express-server/index.js && node socket-server/socketIO.js",

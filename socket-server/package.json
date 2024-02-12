@@ -4,7 +4,7 @@
   "description": "",
   "main": "socketIO.js",
   "engines": {
-    "node": "18.x"
+    "node": "18.18.2"
   },
   "scripts": {
     "start": "node socketIO.js",
