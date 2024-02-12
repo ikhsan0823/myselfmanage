@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "socketIO.js",
+  "engines": {
+    "node": "21.4.0"
+  },
   "scripts": {
     "start": "node socketIO.js",
     "test": "echo \"Error: no test specified\" && exit 1"

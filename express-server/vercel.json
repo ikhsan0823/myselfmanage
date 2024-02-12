@@ -4,10 +4,6 @@
       {
         "src": "./express-server/index.js",
         "use": "@vercel/node"
-      },
-      {
-        "src": "./socket-server/socketIO.js",
-        "use": "@vercel/node"
       }
     ],
     "routes": [
