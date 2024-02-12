@@ -24,7 +24,7 @@
     "rewrites": [
       {
         "src": "./express-server/(.*)",
-        "dest": "index.js",
+        "dest": "index.js"
       }
     ]
   }
