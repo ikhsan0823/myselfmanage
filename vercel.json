@@ -13,8 +13,12 @@
     "routes": [
       
       {
-        "src": "./express-server/public/(.*)",
+        "src": "./express-server/(.*)",
         "dest": "index.js"
+      },
+      {
+        "src": ".socket-server/(.*)",
+        "dest": "socketIO.js"
       }
     ]
   }
