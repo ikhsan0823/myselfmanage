@@ -20,5 +20,11 @@
         "src": "./socket-server/(.*)",
         "dest": "socketIO.js"
       }
+    ],
+    "rewrites": [
+      {
+        "src": "./express-server/(.*)",
+        "dest": "index.js",
+      }
     ]
   }
